@@ -1,40 +1,39 @@
-from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import classification_report
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
+from StudentClassifier import StudentClassifier
 import pandas as pd
+
+algorithm = 'gradientBoosting'
 
 
 def main():
     student_path = 'data/student-mat.csv'
 
     test1_path = 'data/student-mat-test-1.csv'
-    accuracy_test1 = get_accuracy_from_csv(test1_path, student_path)
-    print('Accuracy Test 1 =', accuracy_test1)
+    print_classification_report_from_csv(student_path, test1_path, 'wavfiles 1')
 
     test2_path = 'data/student-mat-test-2.csv'
-    accuracy_test2 = get_accuracy_from_csv(test2_path, student_path)
-    print('Accuracy Test 2 =', accuracy_test2)
+    print_classification_report_from_csv(student_path, test2_path, 'wavfiles 2')
 
     test3_path = 'data/student-mat-test-3.csv'
-    accuracy_test3 = get_accuracy_from_csv(test3_path, student_path)
-    print('Accuracy Test 3 =', accuracy_test3)
+    print_classification_report_from_csv(student_path, test3_path, 'wavfiles 3')
 
     test4_path = 'data/student-mat-test-4.csv'
-    accuracy_test4 = get_accuracy_from_csv(test4_path, student_path)
-    print('Accuracy Test 4 =', accuracy_test4)
+    print_classification_report_from_csv(student_path, test4_path, 'wavfiles 4')
+
+    test5_path = 'data/student-mat-test-5.csv'
+    print_classification_report_from_csv(student_path, test5_path, 'wavfiles 5')
 
 
-def get_accuracy_from_csv(attributes_path, data_path):
-    X_test, X_train, y_test, y_train = train_test_data_from_csv(attributes_path, data_path)
-    accuracy = get_knn_accuracy(X_test, X_train, y_test, y_train, 6)
-    return accuracy
-
-
-def get_knn_accuracy(X_test, X_train, y_test, y_train, k):
-    clf = KNeighborsClassifier(n_neighbors=k)
-    clf.fit(X_train, y_train)
-    accuracy = clf.score(X_test, y_test)
-    return accuracy
+def print_classification_report_from_csv(student_path, test1_path, test_name):
+    X_test, X_train, y_test, y_train = train_test_data_from_csv(test1_path, student_path)
+    clf = StudentClassifier(algorithm)
+    clf.train_classifier(X_train, y_train)
+    predictions = clf.get_predictions(X_test)
+    accuracy = clf.get_accuracy(X_test, y_test)
+    print(f'Accuracy {test_name} =', accuracy)
+    print(classification_report(y_test, predictions))
 
 
 def train_test_data_from_csv(attributes_path, data_path):
