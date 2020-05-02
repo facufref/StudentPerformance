@@ -12,12 +12,12 @@ Fjob;False
 reason;False
 guardian;False
 traveltime;False
-studytime;False
+studytime;True
 failures;True
 schoolsup;True
 famsup;True
 paid;True
-activities;False
+activities;True
 nursery;False
 higher;False
 internet;False

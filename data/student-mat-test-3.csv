@@ -21,9 +21,9 @@ activities;False
 nursery;False
 higher;False
 internet;False
-romantic;False
-famrel;False
-freetime;False
+romantic;True
+famrel;True
+freetime;True
 goout;True
 Dalc;False
 Walc;False

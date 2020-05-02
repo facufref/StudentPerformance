@@ -23,7 +23,7 @@ class StudentClassifier:
         elif algorithm == 'randomForest':
             self._classifier = RandomForestClassifier(n_estimators=100, random_state=0)
         elif algorithm == 'gradientBoosting':
-            self._classifier = GradientBoostingClassifier(random_state=0, max_depth=3, learning_rate=0.1)  # alternative => max_depth=1, learning_rate=0.01
+            self._classifier = GradientBoostingClassifier(random_state=0, max_depth=3, learning_rate=0.1, n_estimators=100)  # alternative => max_depth=1, learning_rate=0.01
         elif algorithm == 'svm':
             self._classifier = SVC()  # alternative => C=1000, gamma=1000. Also pre-process data
         elif algorithm == 'neuralNetworks':
